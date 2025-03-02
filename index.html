@@ -1,117 +1,79 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Send a notification to your love!</title>
-  <style>
-    body {
-      font-family: 'Arial', sans-serif;
-      background-color: #f8f0f0;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      margin: 0;
-      flex-direction: column;
-      text-align: center;
-    }
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mi Página Bonita de Amor</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f8d0c2;
+        text-align: center;
+        padding: 20px;
+        color: #5f4b8b;
+      }
+      h1 {
+        color: #ff69b4;
+        font-size: 3em;
+      }
+      .cute-button {
+        background-color: #ff69b4;
+        color: white;
+        font-size: 1.5em;
+        padding: 15px 30px;
+        border: none;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+      }
+      .cute-button:hover {
+        background-color: #ff1493;
+      }
+      .image-container {
+        margin-top: 20px;
+      }
+      img {
+        width: 200px;
+        height: auto;
+        border-radius: 50%;
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Send a notification to your love! 💖</h1>
+    <button class="cute-button" id="notifyButton">I need you</button>
+    <div class="image-container">
+      <img src="https://placekitten.com/400/400" alt="Cute kitten" />
+    </div>
 
-    h1 {
-      color: #e40078;
-      font-size: 2.5em;
-      margin-bottom: 20px;
-    }
-
-    .button-container {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      margin-top: 20px;
-    }
-
-    .love-button {
-      background-color: #ff66b2;
-      color: white;
-      font-size: 1.5em;
-      padding: 15px 30px;
-      border: none;
-      border-radius: 50px;
-      cursor: pointer;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-      transition: all 0.3s ease;
-    }
-
-    .love-button:hover {
-      background-color: #ff3385;
-      transform: scale(1.1);
-    }
-
-    .love-button:active {
-      background-color: #ff1a6b;
-      transform: scale(1);
-    }
-
-    .love-button:focus {
-      outline: none;
-    }
-
-    .cute-kittens {
-      margin-top: 40px;
-    }
-
-    .kitten {
-      width: 100px;
-      margin: 10px;
-      border-radius: 50%;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    }
-  </style>
-</head>
-<body>
-
-  <h1>Send a notification to your love!</h1>
-
-  <div class="button-container">
-    <button class="love-button" id="sendNotificationButton">I need you!</button>
-  </div>
-
-  <div class="cute-kittens">
-    <img src="https://placekitten.com/100/100" alt="Cute kitten" class="kitten">
-    <img src="https://placekitten.com/100/100" alt="Cute kitten" class="kitten">
-    <img src="https://placekitten.com/100/100" alt="Cute kitten" class="kitten">
-  </div>
-
-  <script>
-    document.getElementById('sendNotificationButton').addEventListener('click', function() {
-      // URL del Webhook de Discord
-      const webhookUrl = "https://discord.com/api/webhooks/1345561441477988372/cRYGV0tW2MzL7tSHY1-o72eLfMsPLKhPYRBrzcbHVHuHzIsM3f9CTuw28rT11hCT_Hrd";
+    <script>
+      const webhookUrl = "https://discord.com/api/webhooks/1345561441477988372/cRYGV0tW2MzL7tSHY1-o72eLfMsPLKhPYRBrzcbHVHuHzIsM3f9CTuw28rT11hCT_Hrd"; // Pega la URL de tu webhook aquí
       
-      // Datos de la notificación
-      const data = {
-        content: "¡Tienes una nueva notificación de amor! 💖",  // Mensaje de la notificación
-        username: "Bot de Amor"
-      };
+      document.getElementById('notifyButton').addEventListener('click', function() {
+        const data = {
+          content: "¡Hola! 💖 Esta es una notificación de amor para ti. 😘",
+          username: "Bot de Amor"
+        };
 
-      // Enviar la notificación al webhook de Discord
-      fetch(webhookUrl, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(data)
-      })
-      .then(response => {
-        if (!response.ok) {
-          throw new Error('Hubo un problema con la notificación al webhook');
-        }
-        console.log('Notificación enviada con éxito');
-      })
-      .catch(error => {
-        console.error('Error al enviar la notificación:', error);
+        fetch(webhookUrl, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(data)
+        })
+        .then(response => {
+          if (!response.ok) {
+            throw new Error('Hubo un problema con la notificación al webhook');
+          }
+          console.log('Notificación enviada con éxito');
+        })
+        .catch(error => {
+          console.error('Error al enviar la notificación:', error);
+        });
       });
-    });
-  </script>
-
-</body>
+    </script>
+  </body>
 </html>
