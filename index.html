@@ -3,98 +3,112 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Botón Webhook</title>
+  <title>Send a notification to your love!</title>
   <style>
-    /* Estilos globales */
     body {
       font-family: 'Arial', sans-serif;
-      background-color: #f0f0f0;
+      background-color: #f8f0f0;
       display: flex;
       justify-content: center;
       align-items: center;
       height: 100vh;
       margin: 0;
+      flex-direction: column;
       text-align: center;
-    }
-
-    .container {
-      background-color: #fff;
-      padding: 40px;
-      border-radius: 15px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-      text-align: center;
-      max-width: 450px;
-      width: 100%;
     }
 
     h1 {
-      color: #333;
-      font-size: 26px;
+      color: #e40078;
+      font-size: 2.5em;
       margin-bottom: 20px;
-      font-weight: bold;
     }
 
-    /* Estilo del botón */
-    #webhook-button {
-      font-size: 20px;
-      padding: 15px 40px;
-      background-color: #FF6F61;
+    .button-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 20px;
+    }
+
+    .love-button {
+      background-color: #ff66b2;
       color: white;
+      font-size: 1.5em;
+      padding: 15px 30px;
       border: none;
       border-radius: 50px;
       cursor: pointer;
-      transition: background-color 0.3s ease, transform 0.2s ease;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s ease;
     }
 
-    #webhook-button:hover {
-      background-color: #FF3B2D;
+    .love-button:hover {
+      background-color: #ff3385;
       transform: scale(1.1);
     }
 
-    #webhook-button:active {
-      background-color: #E73926;
+    .love-button:active {
+      background-color: #ff1a6b;
+      transform: scale(1);
     }
 
-    /* Animación de loading */
-    #loading {
-      display: none;
-      margin-top: 20px;
-      font-size: 18px;
-      color: #FF6F61;
+    .love-button:focus {
+      outline: none;
+    }
+
+    .cute-kittens {
+      margin-top: 40px;
+    }
+
+    .kitten {
+      width: 100px;
+      margin: 10px;
+      border-radius: 50%;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     }
   </style>
 </head>
 <body>
 
-  <div class="container">
-    <h1>Send a notification to your love!</h1>
-    <button id="webhook-button">
-      I need you
-    </button>
-    <div id="loading">Enviando notificación...</div>
+  <h1>Send a notification to your love!</h1>
+
+  <div class="button-container">
+    <button class="love-button" id="sendNotificationButton">Send notification!</button>
+  </div>
+
+  <div class="cute-kittens">
+    <img src="https://placekitten.com/100/100" alt="Cute kitten" class="kitten">
+    <img src="https://placekitten.com/100/100" alt="Cute kitten" class="kitten">
+    <img src="https://placekitten.com/100/100" alt="Cute kitten" class="kitten">
   </div>
 
   <script>
-    document.getElementById('webhook-button').addEventListener('click', function() {
-      document.getElementById('loading').style.display = 'block'; // Mostrar el texto de loading
+    document.getElementById('sendNotificationButton').addEventListener('click', function() {
+      // URL del Webhook de Discord
+      const webhookUrl = "https://discord.com/api/webhooks/1345561441477988372/cRYGV0tW2MzL7tSHY1-o72eLfMsPLKhPYRBrzcbHVHuHzIsM3f9CTuw28rT11hCT_Hrd";
+      
+      // Datos de la notificación
+      const data = {
+        content: "¡Tienes una nueva notificación de amor! 💖",  // Mensaje de la notificación
+        username: "Bot de Amor"
+      };
 
-      fetch('https://discord.com/api/webhooks/1345561441477988372/cRYGV0tW2MzL7tSHY1-o72eLfMsPLKhPYRBrzcbHVHuHzIsM3f9CTuw28rT11hCT_Hrd', {
+      // Enviar la notificación al webhook de Discord
+      fetch(webhookUrl, {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json',
+          'Content-Type': 'application/json'
         },
-        body: JSON.stringify({
-          content: 'Jimmy needs you', // El mensaje que quieres enviar
-        }),
+        body: JSON.stringify(data)
       })
-      .then(response => response.json())
-      .then(data => {
-        console.log('Notificación enviada', data);
-        document.getElementById('loading').style.display = 'none'; // Ocultar el texto de loading
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Hubo un problema con la notificación al webhook');
+        }
+        console.log('Notificación enviada con éxito');
       })
       .catch(error => {
-        console.error('Error al enviar la notificación', error);
-        document.getElementById('loading').style.display = 'none'; // Ocultar el texto de loading
+        console.error('Error al enviar la notificación:', error);
       });
     });
   </script>
