@@ -45,11 +45,13 @@
             display: flex;
             justify-content: center;
             gap: 30px;
+            flex-wrap: wrap;
         }
         .images-container img {
-            width: 700px; /* Aumenté el tamaño aún más */
+            width: 900px; /* Tamaño ajustado más grande */
             height: auto;
-            border-radius: 15px; /* Bordes redondeados */
+            max-width: 100%; /* Hace que las imágenes sean responsivas */
+            border-radius: 15px;
         }
         footer {
             position: fixed;
@@ -70,7 +72,7 @@
         <button class="notification-button" onclick="sendNotification()">I need you</button>
     </div>
 
-    <!-- Aquí las imágenes ahora están más abajo y son aún más grandes -->
+    <!-- Aquí las imágenes ahora están más abajo y son más grandes -->
     <div class="images-container">
         <img src="https://i.postimg.cc/Lgv91Z60/kitten1.png" alt="Cute Kitten 1">
         <img src="https://i.postimg.cc/nMfkFSjP/kitten2.png" alt="Cute Kitten 2">
