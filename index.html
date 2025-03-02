@@ -1,47 +1,42 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Private Button</title>
-    <style>
-        body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            background-color: #f4f4f4;
-            font-family: Arial, sans-serif;
-        }
-        button {
-            font-size: 20px;
-            padding: 15px 30px;
-            background-color: #ff4d4d;
-            color: white;
-            border: none;
-            border-radius: 10px;
-            cursor: pointer;
-        }
-        button:hover {
-            background-color: #ff1a1a;
-        }
-    </style>
-</head>
-<body>
-    <button onclick="sendAlert()">I need you</button>
+    <title>Enviar Notificación a Discord</title>
     <script>
-        function sendAlert() {
-            fetch(https://discord.com/api/webhooks/1345561441477988372/cRYGV0tW2MzL7tSHY1-o72eLfMsPLKhPYRBrzcbHVHuHzIsM3f9CTuw28rT11hCT_Hrd, {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ content: "I need you" })
-            }).then(() => {
-                alert("Alert sent!");
-            }).catch(err => {
-                alert("Error sending alert.");
-                console.error(err);
-            });
+        async function sendWebhook() {
+            // URL del webhook de Discord (reemplaza con tu URL)
+            const webhookUrl = 'https://discord.com/api/webhooks/1345561441477988372/cRYGV0tW2MzL7tSHY1-o72eLfMsPLKhPYRBrzcbHVHuHzIsM3f9CTuw28rT11hCT_Hrd';
+
+            // Datos que quieres enviar al webhook
+            const message = {
+                content: "¡Este es un mensaje desde mi página web!"
+            };
+
+            try {
+                // Enviamos la petición POST al webhook
+                const response = await fetch(webhookUrl, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(message)
+                });
+
+                if (response.ok) {
+                    console.log('Notificación enviada a Discord.');
+                } else {
+                    console.error('Error al enviar notificación:', response.statusText);
+                }
+            } catch (error) {
+                console.error('Error al enviar la solicitud:', error);
+            }
         }
     </script>
+</head>
+<body>
+    <h1>Enviar Notificación a Discord</h1>
+    <button onclick="sendWebhook()">Enviar Notificación</button>
 </body>
 </html>
