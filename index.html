@@ -21,11 +21,12 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            flex-wrap: wrap;
             margin-top: 30px;
+            gap: 30px;
         }
         .button-container img {
-            width: 100px;
-            margin-right: 20px;
+            width: 120px;
             animation: bounce 1s infinite alternate;
         }
         .notification-button {
@@ -67,7 +68,12 @@
     <h1>Send a Notification to Your Love!</h1>
 
     <div class="button-container">
-        <img src="https://i.postimg.cc/Lgv91Z60/kitten1.png" alt="Cute Kitten">
+        <img src="https://postimg.cc/Lgv91Z60" alt="Cute Kitten 1">
+        <img src="https://postimg.cc/nMfkFSjP" alt="Cute Kitten 2">
+        <img src="https://postimg.cc/NL8x58Rf" alt="Cute Kitten 3">
+    </div>
+
+    <div class="button-container">
         <button class="notification-button" onclick="sendNotification()">I need you</button>
     </div>
 
