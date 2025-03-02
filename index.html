@@ -25,10 +25,6 @@
             margin-top: 30px;
             gap: 30px;
         }
-        .button-container img {
-            width: 120px;
-            animation: bounce 1s infinite alternate;
-        }
         .notification-button {
             background-color: #ff4d88;
             color: white;
@@ -44,13 +40,15 @@
         .notification-button:hover {
             background-color: #ff3385;
         }
-        @keyframes bounce {
-            0% {
-                transform: translateY(0);
-            }
-            100% {
-                transform: translateY(-10px);
-            }
+        .images-container {
+            margin-top: 50px;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+        .images-container img {
+            width: 120px;
+            height: auto;
         }
         footer {
             position: fixed;
@@ -60,12 +58,6 @@
             color: white;
             text-align: center;
             padding: 10px;
-        }
-        .images-container {
-            margin-top: 50px;
-            display: flex;
-            justify-content: center;
-            gap: 20px;
         }
     </style>
 </head>
