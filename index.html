@@ -1,42 +1,102 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Enviar Notificación a Discord</title>
-    <script>
-        async function sendWebhook() {
-            // URL del webhook de Discord (reemplaza con tu URL)
-            const webhookUrl = 'https://discord.com/api/webhooks/1345561441477988372/cRYGV0tW2MzL7tSHY1-o72eLfMsPLKhPYRBrzcbHVHuHzIsM3f9CTuw28rT11hCT_Hrd';
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Botón Webhook</title>
+  <style>
+    /* Estilos globales */
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #f1f1f1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      text-align: center;
+    }
 
-            // Datos que quieres enviar al webhook
-            const message = {
-                content: "¡Este es un mensaje desde mi página web!"
-            };
+    .container {
+      background-color: #ffffff;
+      padding: 40px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      max-width: 400px;
+      width: 100%;
+    }
 
-            try {
-                // Enviamos la petición POST al webhook
-                const response = await fetch(webhookUrl, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(message)
-                });
+    h1 {
+      color: #333;
+      font-size: 24px;
+      margin-bottom: 20px;
+    }
 
-                if (response.ok) {
-                    console.log('Notificación enviada a Discord.');
-                } else {
-                    console.error('Error al enviar notificación:', response.statusText);
-                }
-            } catch (error) {
-                console.error('Error al enviar la solicitud:', error);
-            }
-        }
-    </script>
+    /* Estilo del botón */
+    #webhook-button {
+      font-size: 20px;
+      padding: 15px 40px;
+      background-color: #FF6F61;
+      color: white;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: background-color 0.3s ease, transform 0.2s;
+    }
+
+    #webhook-button:hover {
+      background-color: #FF3B2D;
+      transform: scale(1.1);
+    }
+
+    #webhook-button:active {
+      background-color: #E73926;
+    }
+
+    /* Animación de loading */
+    #loading {
+      display: none;
+      margin-top: 20px;
+      font-size: 18px;
+      color: #FF6F61;
+    }
+  </style>
 </head>
 <body>
-    <h1>Enviar Notificación a Discord</h1>
-    <button onclick="sendWebhook()">Enviar Notificación</button>
+
+  <div class="container">
+    <h1>¡Haz clic para enviar una notificación!</h1>
+    <button id="webhook-button">
+      I need you
+    </button>
+    <div id="loading">Enviando notificación...</div>
+  </div>
+
+  <script>
+    document.getElementById('webhook-button').addEventListener('click', function() {
+      document.getElementById('loading').style.display = 'block'; // Mostrar el texto de loading
+
+      fetch('https://discord.com/api/webhooks/1345561441477988372/cRYGV0tW2MzL7tSHY1-o72eLfMsPLKhPYRBrzcbHVHuHzIsM3f9CTuw28rT11hCT_Hrd', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          content: 'Jimmy needs you', // El mensaje que quieres enviar
+        }),
+      })
+      .then(response => response.json())
+      .then(data => {
+        console.log('Notificación enviada', data);
+        document.getElementById('loading').style.display = 'none'; // Ocultar el texto de loading
+      })
+      .catch(error => {
+        console.error('Error al enviar la notificación', error);
+        document.getElementById('loading').style.display = 'none'; // Ocultar el texto de loading
+      });
+    });
+  </script>
+
 </body>
 </html>
